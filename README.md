@@ -69,3 +69,8 @@ class ApplyVelocitySystem : IEcsRun, IEcsInject<EcsDefaultWorld>, IEcsInject<Tim
              |       
              | ModuleName.cs
 ```
+`SomeComponent.cs` - обычные компоненты или компоненты-теги.
+`SomeSignal.cs` - компонент-событие крепящийся к цели события.
+`SomeEvent.cs` - компонент-событие используемый в сущности-событие, для создания нескольких событий для одной сущности.
+`SomeSystem.cs` - Системы.
+`ModuleName.cs` - Класс реализующий интерфейс `IEcsModule`, добавляющий в пайплайн системы модуля.
