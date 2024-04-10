@@ -2,6 +2,35 @@
 Данный репозитопий это сборник заметок и рекомендаций по коду для фреймворка [DragonECS](https://github.com/DCFApixels/DragonECS). Материал расположенный в этом репозитории не является сводом правил, не обязателен к ознакомлению, и имеет только рекомендательный характер.
 
 # Стиль кода
+
+Пример стиля
+```csharp
+class ApplyVelocitySystem : IEcsRun, IEcsInject<EcsDefaultWorld>, IEcsInject<TimeService>
+{
+    class Aspect : EcsAspect
+    {
+        public EcsPool<Pose> poses = Inc;
+        public EcsPool<Velocity> velocities = Inc;
+        public EcsTagPool<FreezedTag> freezedTags = Exc;
+    }
+
+    public void Inject(EcsDefaultWorld obj) => _world = obj;
+    public void Inject(TimeService obj) => _time = obj;
+
+    EcsDefaultWorld _world;
+    TimeService _time;
+
+    public void Run()
+    {
+        foreach (var e in _world.Where(out Aspect a))
+        {
+            a.poses.Get(e).position += a.velocities.Get(e).value * _time.DeltaTime;
+        }
+    }
+}
+```
+
+
 Начну с объявления аспектов. Аспекты, хоть и могут использоваться одновременно несколькими системами, удобнее всего объявлять для каждой системы свои прямо внутри систем. 
 
 Иименование полей в Аспектах. Поля для кеша пулов называть по названию компонента во множественном числе，например `EcsPool<Health> healths`. Для этого пулы фейково реализуют IEnumerable<T>, чтобы автодополненте IDE предлагало такое наименование.
@@ -12,4 +41,4 @@
 
 Именование аспектов. Многие системы работают только с одним аспектом, так что аспекты можно нызывать просто `Aspect`. Если аспектов несколько то основной также называть `Aspect` а второстепенный с префиксом, например `EventAspect`. 
 
-Именование переменных. По той же причине что системы часто работают только с одним аспектом, возвращаемый запросом `Where` экземпляр аспекта можно называть просто `a`, а сущности внутри `foreach` просто `e`, например: `foreach(var e in _world.Where(out Aspect a)`. Аналогично именованию аспектов, если система работает с несколькими аспектами, то к `a` и `e` добавляется префикс, например: `foreach(var eventE in _world.Where(out EventAspect eventA)`
+Именование переменных. По той же причине что системы часто работают только с одним аспектом, возвращаемый запросом `Where` экземпляр аспекта можно называть просто `a`, а сущности внутри `foreach` просто `e`, например: `foreach(var e in _world.Where(out Aspect a)`. Аналогично именованию аспектов, если система работает с несколькими аспектами, то к `a` и `e` добавляется префикс, например: `foreach(var eventE in _world.Where(out EventAspect eventA)`.
