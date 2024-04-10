@@ -101,7 +101,7 @@ class ApplyVelocitySystem : IEcsRun
 Для систем и компонентов присущих одному модулю добавлять мета-атрибут MetaGroup, в качесве корневого каталога группы использовать название модуля. Пример:
 ```c#
 // Слово модуль из SomeModule будет автоматически удаленно, останется только Some
-[MetaGroup(nameof(SomeModule.cs))]
+[MetaGroup(nameof(SomeModule))]
 public struct SomeComponent : IEcsComponent
 {
    //...
