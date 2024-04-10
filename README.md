@@ -1,2 +1,2 @@
 # DragonECS-Vault
-A set of notes and code recommendations for the DragonECS framework.
+Этот репозиторий - это просто зборник заметок и рекомендаций по коду для фреймворка DragonECS.
