@@ -30,6 +30,29 @@ class ApplyVelocitySystem : IEcsRun, IEcsInject<EcsDefaultWorld>, IEcsInject<Tim
     }
 }
 ```
+Тот же пример, но с Auto-Injections：
+```csharp
+class ApplyVelocitySystem : IEcsRun
+{
+    class Aspect : EcsAspect
+    {
+        public EcsPool<Pose> poses = Inc;
+        public EcsPool<Velocity> velocities = Inc;
+        public EcsTagPool<FreezedTag> freezedTags = Exc;
+    }
+
+    [EcsInject] EcsDefaultWorld _world;
+    [EcsInject] TimeService _time;
+
+    public void Run()
+    {
+        foreach (var e in _world.Where(out Aspect a))
+        {
+            a.poses.Get(e).position += a.velocities.Get(e).value * _time.DeltaTime;
+        }
+    }
+}
+```
 
 
 Начну с объявления аспектов. Аспекты, хоть и могут использоваться одновременно несколькими системами, удобнее всего объявлять для каждой системы свои прямо внутри систем. 
@@ -77,7 +100,7 @@ class ApplyVelocitySystem : IEcsRun, IEcsInject<EcsDefaultWorld>, IEcsInject<Tim
 
 Для систем и компонентов присущих одному модулю жобавлять мета-атрибут MetaGroup, в качесве корневого каталога группы использовать название модуля. Пример:
 ```c#
-// Слово модуль из SomeModule будет удаленно, останется только Some
+// Слово модуль из SomeModule будет автоматически удаленно, останется только Some
 [MetaGroup(nameof(SomeModule.cs))]
 public struct SomeComponent : IEcsComponent
 {
