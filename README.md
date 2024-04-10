@@ -74,3 +74,13 @@ class ApplyVelocitySystem : IEcsRun, IEcsInject<EcsDefaultWorld>, IEcsInject<Tim
 + `SomeEvent.cs` - компонент-событие используемый в сущности-событие, для создания нескольких событий для одной сущности.
 + `SomeSystem.cs` - Системы.
 + `ModuleName.cs` - Класс реализующий интерфейс `IEcsModule`, добавляющий в пайплайн системы модуля.
+
+Для систем и компонентов присущих одному модулю жобавлять мета-атрибут MetaGroup, в качесве корневого каталога группы использовать название модуля. Пример:
+```c#
+// Слово модуль из SomeModule будет удаленно, останется только Some
+[MetaGroup(nameof(SomeModule.cs))]
+public struct SomeComponent : IEcsComponent
+{
+   //...
+}
+```
