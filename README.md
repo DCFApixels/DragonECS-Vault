@@ -81,13 +81,13 @@ class ApplyVelocitySystem : IEcsRun
       +------+
       |      | Components/
       |      +------+
-      |      |      | SomeComponent1.cs
-             |      | SomeComponent2.cs
+      |      |      | SomeComponent.cs
+             |      | IsTagged.cs
              |       
              | Events/
              +------+
-             |      | SomeEvent1.cs
-             |      | SomeSignal1.cs
+             |      | SomeEvent.cs
+             |      | SomeSignal.cs
              |       
              | Systems/
              +------+
@@ -96,7 +96,8 @@ class ApplyVelocitySystem : IEcsRun
              |       
              | SomeModule.cs
 ```
-+ `SomeComponent.cs` - обычные компоненты или компоненты-теги.
++ `SomeComponent.cs` - обычные компоненты.
++ `IsTagged.cs` - компоненты-теги которые используются просто как bool флаг, рекомендуется называть по аналогии с рекомендацией наименования bool полей, тоесть с префиксом Is.
 + `SomeSignal.cs` - компонент-событие крепящийся к цели события.
 + `SomeEvent.cs` - компонент-событие используемый в сущности-событие, для создания нескольких событий для одной сущности.
 + `SomeSystem.cs` - Системы.
