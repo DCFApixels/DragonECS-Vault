@@ -81,20 +81,22 @@ class ApplyVelocitySystem : IEcsRun
       +------+
       |      | Components/
       |      +------+
-      |      |      | SomeComponent.cs
-             |      | IsTagged.cs
-             |       
-             | Events/
-             +------+
-             |      | SomeEvent.cs
-             |      | SomeSignal.cs
-             |       
+      |      |      ¦ SomeComponent.cs
+      ¦      |      : IsTagged.cs
+      :      |      ·
+      ·      | Events/
+      ·      +------+
+             |      ¦ SomeEvent.cs
+             |      : SomeSignal.cs
+             |      ·
              | Systems/
              +------+
-             |      | SomeSystem1.cs
-             |      | SomeSystem2.cs
-             |       
-             | SomeModule.cs
+             |      ¦ SomeSystem1.cs
+             |      : SomeSystem2.cs
+             |      · 
+             ¦ SomeModule.cs
+             :
+             ·
 ```
 + `SomeComponent.cs` - обычные компоненты.
 + `IsTagged.cs` - компоненты-теги которые используются просто как bool флаг, рекомендуется называть по аналогии с рекомендацией наименования bool полей, тоесть с префиксом Is.
