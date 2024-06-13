@@ -107,7 +107,7 @@ class ApplyVelocitySystem : IEcsRun
 
 Модули так же удобно группировать в один надмодуль, тоесть создавать модуль который в `Import` методе просто добавляет другие модули. Например в своем проекте те модули которые могут работать независимо от Unity объединяю в модуль `ProjectCoreModule` и то что работает с Unity объединяю в `ProjectUnityModule`. Посде такого раздедения в `EcsRoot` достаточно просто добавить эти 2 модуля.
 
-Для систем и компонентов присущих одному модулю добавлять мета-атрибут MetaGroup, в качесве корневого каталога группы использовать название модуля. Пример:
+Для систем и компонентов присущих одному модулю добавлять мета-атрибут MetaGroup, в качесве корневой группы использовать название модуля. Пример:
 ```c#
 // Слово модуль из SomeModule будет автоматически удаленно, останется только Some
 [MetaGroup(nameof(SomeModule))]
@@ -115,6 +115,14 @@ public struct SomeComponent : IEcsComponent
 {
    //...
 }
+```
+Далее можно следующей подгруппой выбрать то чем является тип, компонентом или системой. Для этого в EcsConsts есть предусмотренные константы.
+```c#
+[MetaGroup(nameof(SomeModule), EcsConsts.COMPONENTS_GROUP)]
+public struct SomeComponent : IEcsComponent { /* ... */ }
+
+[MetaGroup(nameof(SomeModule), EcsConsts.SYSTEMS_GROUP)]
+public class SomeSystem : IEcsRun { /* ... */ }
 ```
 
 # Мульти миры
