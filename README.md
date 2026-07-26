@@ -45,8 +45,8 @@ class ApplyVelocitySystem : IEcsRun
         public EcsTagPool<FreezedTag> freezedTags = Exc;
     }
 
-    [EcsInject] EcsDefaultWorld _world;
-    [EcsInject] TimeService _time;
+    [DI] EcsDefaultWorld _world;
+    [DI] TimeService _time;
 
     public void Run()
     {
