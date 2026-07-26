@@ -147,7 +147,10 @@ public class SomeSystem : IEcsRun { /* ... */ }
 ### Event
 `Event` описывает уже произошедший факт. Он порождается одной системой, но может обрабатываться многими системами, которые реагируют на случившееся. Ответственность за очистку `Event` лежит на породившей системе либо на общей системе очистки в конце `Update`.
 
-<!-- TODO: Вставить сюда диаграмму сообщений. -->
+<p align="center">
+<img width="854" height="160" alt="image" src="https://github.com/user-attachments/assets/3a26fe45-d77f-4490-b474-b8abd867ba07" />
+</p>
+
 > Диаграмма взята со страницы [codewriter-packages/Morpeh.Events](https://github.com/codewriter-packages/Morpeh.Events), так как она очень качественно демонстрирует эту идею.
 
 ### Self и Target
